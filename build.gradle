@@ -23,6 +23,7 @@ apply plugin:"org.grails.grails-gsp"
 repositories {
     mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
+    maven { url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/" }
 }
 
 dependencies {
@@ -57,6 +58,8 @@ dependencies {
     testCompile "org.grails:grails-web-testing-support"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+    compile "com.gexin.platform:gexin-rp-sdk-http:4.0.1.2"
+    compile "com.gexin.platform:gexin-rp-sdk-template:4.0.0.5"
 }
 
 bootRun {
