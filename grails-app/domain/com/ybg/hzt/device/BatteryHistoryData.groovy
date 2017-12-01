@@ -65,4 +65,18 @@ class BatteryHistoryData {
     Float ex3 = 0f//扩展
     Float ex4 = 0f//扩展
     Float ex5 = 0f//扩展
+
+    def beforeInsert() {
+        def calendar = Calendar.getInstance(Locale.CHINA)
+        createTime = calendar.time
+        createYear = calendar.get(Calendar.YEAR)
+        createMonth = calendar.get(Calendar.MONTH)
+        createDay = calendar.get(Calendar.DAY_OF_MONTH)
+        createHour = calendar.get(Calendar.HOUR_OF_DAY)
+        createMinute = calendar.get(Calendar.MINUTE)
+        createSecond = calendar.get(Calendar.SECOND)
+        dayInWeek = calendar.get(Calendar.DAY_OF_WEEK)
+        weekInYear = calendar.get(Calendar.WEEK_OF_YEAR)
+    }
+
 }

@@ -54,4 +54,14 @@ class Battery {
     Float ex3 = 0f//扩展
     Float ex4 = 0f//扩展
     Float ex5 = 0f//扩展
+    Date createTime = new Date()
+
+    def beforeInsert() {
+        createTime = new Date()
+    }
+
+    def beforeUpdate() {
+        createTime = new Date()
+    }
+
 }
