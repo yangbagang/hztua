@@ -17,7 +17,7 @@ class BatteryController {
         if (UserUtil.checkToken(token)) {
             def userInfo = UserInfo.get(UserUtil.getUserId(token))
             if (userInfo) {
-                def data = UserBattery.findAllByUserInfo(userInfo)*.battery
+                def data = Battery.findAllByUidInList(UserBattery.findAllByUserInfo(userInfo)*.uid)
 
                 map.isSuccess = true
                 map.message = ""

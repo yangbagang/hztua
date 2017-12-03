@@ -4,8 +4,10 @@ import com.ybg.hzt.user.UserInfo
 
 class UserBattery {
 
-    static belongsTo = [userInfo: UserInfo, battery: Battery]
+    static belongsTo = [userInfo: UserInfo]
 
     static constraints = {
     }
+
+    String uid = ""
 }
