@@ -107,6 +107,7 @@ class UserInfoController {
                 userInfo.name = name
                 userInfo.email = email
                 userInfo.company = company
+                userInfo.save flush: true
 
                 map.isSuccess = true
                 map.message = ""
@@ -164,6 +165,31 @@ class UserInfoController {
                 map.errorCode = "2"
                 map.data = "false"
             }
+        } else {
+            map.isSuccess = false
+            map.message = "登录凭证失效，请重新登录"
+            map.errorCode = "1"
+            map.data = "false"
+        }
+
+        render map as JSON
+    }
+
+    /**
+     * 获取用户信息
+     * @param token 用户token
+     * @return
+     */
+    def getUserInfo(String token) {
+        def map = [:]
+        if (UserUtil.checkToken(token)) {
+            def userId = UserUtil.getUserId(token)
+            def userInfo = UserInfo.get(userId)
+
+            map.isSuccess = true
+            map.message = ""
+            map.errorCode = "0"
+            map.data = userInfo
         } else {
             map.isSuccess = false
             map.message = "登录凭证失效，请重新登录"

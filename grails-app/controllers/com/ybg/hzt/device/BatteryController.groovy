@@ -3,6 +3,7 @@ package com.ybg.hzt.device
 import com.ybg.hzt.user.UserInfo
 import com.ybg.hzt.utils.UserUtil
 import grails.converters.JSON
+import org.apache.commons.lang.StringUtils
 
 class BatteryController {
 
@@ -42,8 +43,9 @@ class BatteryController {
     def saveData() {
         def map = [:]
         def uid = params.uid
-        if (uid != null && uid != "") {
-            def instance = Battery.findByUid(uid)
+        def num = params.num
+        if (StringUtils.isNotEmpty(uid) && StringUtils.isNotEmpty(num)) {
+            def instance = Battery.findByUidAndNum(uid, num)
             if (instance) {
                 batteryService.addData(instance, params)
 
