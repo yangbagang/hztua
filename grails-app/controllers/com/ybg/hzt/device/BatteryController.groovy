@@ -46,19 +46,18 @@ class BatteryController {
         def num = params.num
         if (StringUtils.isNotEmpty(uid) && StringUtils.isNotEmpty(num)) {
             def instance = Battery.findByUidAndNum(uid, num)
-            if (instance) {
-                batteryService.addData(instance, params)
-
-                map.isSuccess = true
-                map.message = ""
-                map.errorCode = "0"
-                map.data = "true"
-            } else {
-                map.isSuccess = false
-                map.message = "设备不存在"
-                map.errorCode = "2"
-                map.data = "false"
+            if (!instance) {
+                instance = new Battery()
+                instance.uid = uid
+                instance.num = num
+                instance.save flush: true
             }
+            batteryService.addData(instance, params)
+
+            map.isSuccess = true
+            map.message = ""
+            map.errorCode = "0"
+            map.data = "true"
         } else {
             map.isSuccess = false
             map.message = "数据错误"
