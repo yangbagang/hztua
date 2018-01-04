@@ -4,6 +4,7 @@ import grails.gorm.transactions.Transactional
 import groovy.sql.Sql
 
 @Transactional(readOnly = true)
+@Deprecated
 class BatteryHistoryDataService {
 
     def dataSource

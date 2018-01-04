@@ -4,6 +4,7 @@ import com.ybg.hzt.user.UserInfo
 import com.ybg.hzt.utils.UserUtil
 import grails.converters.JSON
 
+@Deprecated
 class BatteryHistoryDataController {
 
     def batteryHistoryDataService
