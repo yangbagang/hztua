@@ -170,4 +170,29 @@ class BatteryController {
 
         render map as JSON
     }
+
+    /**
+     * 更新名称
+     * @param uid
+     * @param name
+     * @return
+     */
+    def updateName(String uid, String name) {
+        def map = [:]
+        if (uid && name) {
+            batteryService.updateName(uid, name)
+
+            map.isSuccess = true
+            map.message = ""
+            map.errorCode = "0"
+            map.data = "true"
+        } else {
+            map.isSuccess = false
+            map.message = "数据错误"
+            map.errorCode = "1"
+            map.data = "false"
+        }
+
+        render map as JSON
+    }
 }

@@ -131,4 +131,26 @@ class BatteryService {
         }
     }
 
+    def updateName(String uid, String name) {
+        if (uid.startsWith("A")) {
+            def bs = BatterySystem.findByUid(uid)
+            if (bs) {
+                bs.name = name
+                bs.save flush: true
+            }
+        } else if (uid.startsWith("B")) {
+            def ups = UPSSystem.findByUid(uid)
+            if (ups) {
+                ups.name = name
+                ups.save flush: true
+            }
+        } else if (uid.startsWith("C")) {
+            def ds = DCSystem.findByUid(uid)
+            if (ds) {
+                ds.name = name
+                ds.save flush: true
+            }
+        }
+    }
+
 }
