@@ -113,6 +113,7 @@ class BatteryController {
             map.errorCode = "0"
             map.data = "true"
         } else {
+            println "参数uid没有找到"
             map.isSuccess = false
             map.message = "数据错误"
             map.errorCode = "1"

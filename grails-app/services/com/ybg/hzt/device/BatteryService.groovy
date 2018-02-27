@@ -8,20 +8,21 @@ class BatteryService {
     def addData(Map map) {
         def uid = map.uid
         if (uid != null && uid instanceof String && uid != "") {
-            if (uid.startsWith("A")) {
+            if (uid.startsWith("WLCB")) {
                 addBSData(map)
-            } else if (uid.startsWith("B")) {
+            } else if (uid.startsWith("WLCU")) {
                 addUPSData(map)
-            } else if (uid.startsWith("C")) {
+            } else if (uid.startsWith("WLCD")) {
                 addDCData(map)
             } else {
+                println "uid=${uid}"
                 println("参数错误")
             }
         }
     }
 
     private addBSData(Map map) {
-        def uid = map.uid
+        def uid = map.uid as String
         def bs = BatterySystem.findByUid(uid)
         if (!bs) {
             bs = new BatterySystem()
@@ -43,7 +44,7 @@ class BatteryService {
             if (!battery) {
                 battery = new Battery()
                 battery.uid = uid
-                battery.num = num
+                battery.num = Integer.valueOf(num)
                 battery.system_id = bs.id
                 battery.catalog = 1
             }
@@ -58,7 +59,7 @@ class BatteryService {
     }
 
     private addUPSData(Map map) {
-        def uid = map.uid
+        def uid = map.uid as String
         def ups = UPSSystem.findByUid(uid)
         if (!ups) {
             ups = new UPSSystem()
@@ -80,7 +81,7 @@ class BatteryService {
             if (!battery) {
                 battery = new Battery()
                 battery.uid = uid
-                battery.num = num
+                battery.num = Integer.valueOf(num)
                 battery.system_id = ups.id
                 battery.catalog = 2
             }
@@ -95,7 +96,7 @@ class BatteryService {
     }
 
     private addDCData(Map map) {
-        def uid = map.uid
+        def uid = map.uid as String
         def dc = DCSystem.findByUid(uid)
         if (!dc) {
             dc = new DCSystem()
@@ -117,7 +118,7 @@ class BatteryService {
             if (!battery) {
                 battery = new Battery()
                 battery.uid = uid
-                battery.num = num
+                battery.num = Integer.valueOf(num)
                 battery.system_id = dc.id
                 battery.catalog = 3
             }
