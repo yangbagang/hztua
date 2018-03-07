@@ -39,4 +39,5 @@ class BatteryHistory {
         dayInWeek = calendar.get(Calendar.DAY_OF_WEEK)
         weekInYear = calendar.get(Calendar.WEEK_OF_YEAR)
     }
+
 }

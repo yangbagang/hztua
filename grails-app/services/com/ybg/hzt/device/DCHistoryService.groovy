@@ -4,8 +4,7 @@ import grails.gorm.transactions.Transactional
 import groovy.sql.Sql
 
 @Transactional(readOnly = true)
-@Deprecated
-class BatteryHistoryDataService {
+class DCHistoryService {
 
     def dataSource
 
@@ -34,8 +33,8 @@ class BatteryHistoryDataService {
         def currentSecond = calender.get(Calendar.SECOND)
         calender.set(Calendar.SECOND, currentSecond - 59)
         def startTime = calender.time
-        def query = "select create_second as xValue, avg(?) as yValue from battery_history_data where " +
-                "battery_id=? and create_time >= ? and create_time <=? group by create_second"
+        def query = "select create_second as xValue, avg(?) as yValue from dchistory where " +
+                "dc_system_id=? and create_time >= ? and create_time <=? group by create_second"
         sql.rows(query, [key, batteryId, startTime, endTime])
     }
 
@@ -46,8 +45,8 @@ class BatteryHistoryDataService {
         def currentMinute = calender.get(Calendar.MINUTE)
         calender.set(Calendar.MINUTE, currentMinute - 59)
         def startTime = calender.time
-        def query = "select create_minute as xValue, avg(?) as yValue from battery_history_data where " +
-                "battery_id=? and create_time >= ? and create_time <=? group by create_minute"
+        def query = "select create_minute as xValue, avg(?) as yValue from dchistory where " +
+                "dc_system_id=? and create_time >= ? and create_time <=? group by create_minute"
         sql.rows(query, [key, batteryId, startTime, endTime])
     }
 
@@ -58,8 +57,8 @@ class BatteryHistoryDataService {
         def currentHour = calender.get(Calendar.HOUR_OF_DAY)
         calender.set(Calendar.HOUR_OF_DAY, currentHour - 23)
         def startTime = calender.time
-        def query = "select create_hour as xValue, avg(?) as yValue from battery_history_data where " +
-                "battery_id=? and create_time >= ? and create_time <=? group by create_hour"
+        def query = "select create_hour as xValue, avg(?) as yValue from dchistory where " +
+                "dc_system_id=? and create_time >= ? and create_time <=? group by create_hour"
         sql.rows(query, [key, batteryId, startTime, endTime])
     }
 
@@ -70,8 +69,8 @@ class BatteryHistoryDataService {
         def currentDay = calender.get(Calendar.DAY_OF_MONTH)
         calender.set(Calendar.DAY_OF_MONTH, currentDay - 29)
         def startTime = calender.time
-        def query = "select create_day as xValue, avg(?) as yValue from battery_history_data where " +
-                "battery_id=? and create_time >= ? and create_time <=? group by create_day"
+        def query = "select create_day as xValue, avg(?) as yValue from dchistory where " +
+                "dc_system_id=? and create_time >= ? and create_time <=? group by create_day"
         sql.rows(query, [key, batteryId, startTime, endTime])
     }
 
@@ -82,8 +81,8 @@ class BatteryHistoryDataService {
         def currentMonth = calender.get(Calendar.MONTH)
         calender.set(Calendar.MONTH, currentMonth - 11)
         def startTime = calender.time
-        def query = "select create_month as xValue, avg(?) as yValue from battery_history_data where " +
-                "battery_id=? and create_time >= ? and create_time <=? group by create_month"
+        def query = "select create_month as xValue, avg(?) as yValue from dchistory where " +
+                "dc_system_id=? and create_time >= ? and create_time <=? group by create_month"
         sql.rows(query, [key, batteryId, startTime, endTime])
     }
 
@@ -94,8 +93,9 @@ class BatteryHistoryDataService {
         def currentYear = calender.get(Calendar.YEAR)
         calender.set(Calendar.YEAR, currentYear - 9)
         def startTime = calender.time
-        def query = "select create_year as xValue, avg(?) as yValue from battery_history_data where " +
-                "battery_id=? and create_time >= ? and create_time <=? group by create_year"
+        def query = "select create_year as xValue, avg(?) as yValue from dchistory where " +
+                "dc_system_id=? and create_time >= ? and create_time <=? group by create_year"
         sql.rows(query, [key, batteryId, startTime, endTime])
     }
+
 }

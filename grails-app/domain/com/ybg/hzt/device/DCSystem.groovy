@@ -9,7 +9,6 @@ class DCSystem {
     String name = ""//用户自定义名称
     Integer lac = 0//基站定位，app定位地图
     Integer cid = 0//基站定位，app定位地图
-    Integer num = 0//一个站内，多个被采集对象的序号
     Float bi = 0f//电池电流*
     Float mepur = 0f//R相市电电压
     Float mepus = 0f//S相市电电压
