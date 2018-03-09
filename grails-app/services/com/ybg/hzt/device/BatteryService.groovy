@@ -52,7 +52,7 @@ class BatteryService {
             battery.save flush: true
 
             def batteryHistory = new BatteryHistory()
-            batteryHistory.battery =battery
+            batteryHistory.battery = battery
             batteryHistory.properties = map
             batteryHistory.save flush: true
         }
@@ -89,7 +89,7 @@ class BatteryService {
             battery.save flush: true
 
             def batteryHistory = new BatteryHistory()
-            batteryHistory.battery =battery
+            batteryHistory.battery = battery
             batteryHistory.properties = map
             batteryHistory.save flush: true
         }
@@ -126,7 +126,7 @@ class BatteryService {
             battery.save flush: true
 
             def batteryHistory = new BatteryHistory()
-            batteryHistory.battery =battery
+            batteryHistory.battery = battery
             batteryHistory.properties = map
             batteryHistory.save flush: true
         }
