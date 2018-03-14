@@ -146,6 +146,7 @@ class BatteryHistoryController {
             def battery = Battery.get(batteryId)
             if (userInfo && battery) {
                 def data = batteryHistoryService.calculate(batteryId, key, period)
+                println(data)
 
                 map.isSuccess = true
                 map.message = ""
