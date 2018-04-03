@@ -33,6 +33,7 @@ class BatteryService {
         def num = map.num
         if (num == null || num == 0) {
             bs.properties = map
+            bs.createTime = new Date()
             bs.save flush: true
 
             def bsHistory = new BSHistory()
@@ -70,6 +71,7 @@ class BatteryService {
         def num = map.num
         if (num == null || num == 0) {
             ups.properties = map
+            ups.createTime = new Date()
             ups.save flush: true
 
             def upsHistory = new UPSHistory()
@@ -107,6 +109,7 @@ class BatteryService {
         def num = map.num
         if (num == null || num == 0) {
             dc.properties = map
+            dc.createTime = new Date()
             dc.save flush: true
 
             def dcHistory = new DCHistory()
