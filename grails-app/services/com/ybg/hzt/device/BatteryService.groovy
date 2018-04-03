@@ -50,6 +50,7 @@ class BatteryService {
                 battery.catalog = 1
             }
             battery.properties = map
+            battery.createTime = new Date()
             battery.save flush: true
 
             def batteryHistory = new BatteryHistory()
@@ -88,6 +89,7 @@ class BatteryService {
                 battery.catalog = 2
             }
             battery.properties = map
+            battery.createTime = new Date()
             battery.save flush: true
 
             def batteryHistory = new BatteryHistory()
@@ -126,6 +128,7 @@ class BatteryService {
                 battery.catalog = 3
             }
             battery.properties = map
+            battery.createTime = new Date()
             battery.save flush: true
 
             def batteryHistory = new BatteryHistory()
