@@ -12,13 +12,15 @@ class BatteryController {
     /**
      * 列出某个用户下绑定的所有电池系统
      * @param token
+     * @param name
      */
-    def listBS(String token) {
+    def listBS(String token, String name) {
         def map = [:]
         if (UserUtil.checkToken(token)) {
             def userInfo = UserInfo.get(UserUtil.getUserId(token))
             if (userInfo) {
-                def data = BatterySystem.findAllByUidInList(UserBattery.findAllByUserInfo(userInfo)*.uid)
+                def uidList = UserBattery.findAllByUserInfo(userInfo)*.uid
+                def data = BatterySystem.findAllByUidInList(uidList)
 
                 map.isSuccess = true
                 map.message = ""
@@ -43,13 +45,15 @@ class BatteryController {
     /**
      * 列出某个用户下绑定的所有UPS系统
      * @param token
+     * @param name
      */
-    def listUPS(String token) {
+    def listUPS(String token, String name) {
         def map = [:]
         if (UserUtil.checkToken(token)) {
             def userInfo = UserInfo.get(UserUtil.getUserId(token))
             if (userInfo) {
-                def data = UPSSystem.findAllByUidInList(UserBattery.findAllByUserInfo(userInfo)*.uid)
+                def uidList = UserBattery.findAllByUserInfoAndUidIlike(userInfo, "%" + name + "%")*.uid
+                def data = UPSSystem.findAllByUidInList(uidList)
 
                 map.isSuccess = true
                 map.message = ""
@@ -74,13 +78,15 @@ class BatteryController {
     /**
      * 列出某个用户下绑定的所有直流系统
      * @param token
+     * @param name
      */
-    def listDC(String token) {
+    def listDC(String token, String name) {
         def map = [:]
         if (UserUtil.checkToken(token)) {
             def userInfo = UserInfo.get(UserUtil.getUserId(token))
             if (userInfo) {
-                def data = DCSystem.findAllByUidInList(UserBattery.findAllByUserInfo(userInfo)*.uid)
+                def uidList = UserBattery.findAllByUserInfoAndUidIlike(userInfo, "%" + name + "%")*.uid
+                def data = DCSystem.findAllByUidInList(uidList)
 
                 map.isSuccess = true
                 map.message = ""

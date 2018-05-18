@@ -8,6 +8,9 @@ class UserInfo {
     }
 
     String name
+    String code = ""//用户编号
+    Integer sideName = 0//站点数量
+    Integer installedCapacity = 0//装机容量
     String mobile
     String password
     String appToken = ""
