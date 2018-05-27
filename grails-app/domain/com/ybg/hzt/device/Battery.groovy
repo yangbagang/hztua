@@ -13,7 +13,5 @@ class Battery {
     Float bv = 0f//电池电压
     Float bt = 0f//电池温度
     Float br = 0f//电池内阻
-    Long system_id//系统ID
-    Integer catalog//类型，1=电池系统，2=UPS系统，3=直流系统
     Date createTime = new Date()
 }

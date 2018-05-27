@@ -4,19 +4,18 @@ import com.ybg.hzt.user.UserInfo
 import com.ybg.hzt.utils.UserUtil
 import grails.converters.JSON
 
-class BatteryHistoryController {
+class DeviceHistoryValueController {
 
-    def batteryHistoryService
+    def deviceValueHistoryService
 
-    def list(String token, Long batteryId, Integer pageSize, Integer pageNum) {
+    def list(String token, String uid, Integer pageSize, Integer pageNum) {
         def map = [:]
         if (UserUtil.checkToken(token)) {
             def userInfo = UserInfo.get(UserUtil.getUserId(token))
-            def battery = Battery.get(batteryId)
-            if (userInfo && battery) {
-                def c = BatteryHistory.createCriteria()
+            if (userInfo && uid) {
+                def c = DeviceHistoryValue.createCriteria()
                 def data = c.list(max: pageSize, offset: (pageNum - 1) * pageSize) {
-                    eq("battery", battery)
+                    eq("uid", uid)
                     order("createTime", "desc")
                 }
 
@@ -40,14 +39,12 @@ class BatteryHistoryController {
         render map as JSON
     }
 
-    def calculate(String token, Long batteryId, String key, Integer period) {
+    def calculate(String token, String uid, String key, Integer period) {
         def map = [:]
         if (UserUtil.checkToken(token)) {
             def userInfo = UserInfo.get(UserUtil.getUserId(token))
-            def battery = Battery.get(batteryId)
-            if (userInfo && battery) {
-                def data = batteryHistoryService.calculate(batteryId, key, period)
-                println(data)
+            if (userInfo && uid) {
+                def data = deviceValueHistoryService.calculate(uid, key, period)
 
                 map.isSuccess = true
                 map.message = ""

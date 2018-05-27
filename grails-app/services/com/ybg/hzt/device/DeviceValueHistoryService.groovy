@@ -6,31 +6,31 @@ import groovy.sql.Sql
 import java.text.SimpleDateFormat
 
 @Transactional(readOnly = true)
-class BSHistoryService {
+class DeviceValueHistoryService {
 
     def sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
     def dataSource
 
-    def calculate(Long batteryId, String key, Integer period) {
+    def calculate(String uid, String key, Integer period) {
         if (period == 1) {
-            return calculateBySecond(batteryId, key)
+            return calculateBySecond(uid, key)
         } else if (period == 2) {
-            return calculateByMinute(batteryId, key)
+            return calculateByMinute(uid, key)
         } else if (period == 3) {
-            return calculateByHour(batteryId, key)
+            return calculateByHour(uid, key)
         } else if (period == 4) {
-            return calculateByDay(batteryId, key)
+            return calculateByDay(uid, key)
         } else if (period == 5) {
-            return calculateByMonth(batteryId, key)
+            return calculateByMonth(uid, key)
         } else if (period == 6) {
-            return calculateByYear(batteryId, key)
+            return calculateByYear(uid, key)
         } else {
             return []
         }
     }
 
-    def calculateBySecond(Long batteryId, String key) {
+    def calculateBySecond(String uid, String key) {
         def sql = new Sql(dataSource)
         def calender = Calendar.getInstance(Locale.CHINA)
         def endTime = calender.time
@@ -39,12 +39,12 @@ class BSHistoryService {
         def startTime = calender.time
         def startStr = sdf.format(startTime)
         def endStr = sdf.format(endTime)
-        def query = "select create_second as xValue, round(avg(${key}),3) as yValue from bshistory where " +
-                "battery_system_id=? and create_time >= ? and create_time <=? group by create_second"
-        sql.rows(query, [batteryId, startStr, endStr])
+        def query = "select create_second as xValue, round(avg(${key}),3) as yValue from device_history_value where " +
+                "uid=? and create_time >= ? and create_time <=? group by create_second"
+        sql.rows(query, [uid, startStr, endStr])
     }
 
-    def calculateByMinute(Long batteryId, String key) {
+    def calculateByMinute(String uid, String key) {
         def sql = new Sql(dataSource)
         def calender = Calendar.getInstance(Locale.CHINA)
         def endTime = calender.time
@@ -53,12 +53,12 @@ class BSHistoryService {
         def startTime = calender.time
         def startStr = sdf.format(startTime)
         def endStr = sdf.format(endTime)
-        def query = "select create_minute as xValue, round(avg(${key}),3) as yValue from bshistory where " +
-                "battery_system_id=? and create_time >= ? and create_time <=? group by create_minute"
-        sql.rows(query, [batteryId, startStr, endStr])
+        def query = "select create_minute as xValue, round(avg(${key}),3) as yValue from device_history_value where " +
+                "uid=? and create_time >= ? and create_time <=? group by create_minute"
+        sql.rows(query, [uid, startStr, endStr])
     }
 
-    def calculateByHour(Long batteryId, String key) {
+    def calculateByHour(String uid, String key) {
         def sql = new Sql(dataSource)
         def calender = Calendar.getInstance(Locale.CHINA)
         def endTime = calender.time
@@ -67,12 +67,12 @@ class BSHistoryService {
         def startTime = calender.time
         def startStr = sdf.format(startTime)
         def endStr = sdf.format(endTime)
-        def query = "select create_hour as xValue, round(avg(${key}),3) as yValue from bshistory where " +
-                "battery_system_id=? and create_time >= ? and create_time <=? group by create_hour"
-        sql.rows(query, [batteryId, startStr, endStr])
+        def query = "select create_hour as xValue, round(avg(${key}),3) as yValue from device_history_value where " +
+                "uid=? and create_time >= ? and create_time <=? group by create_hour"
+        sql.rows(query, [uid, startStr, endStr])
     }
 
-    def calculateByDay(Long batteryId, String key) {
+    def calculateByDay(String uid, String key) {
         def sql = new Sql(dataSource)
         def calender = Calendar.getInstance(Locale.CHINA)
         def endTime = calender.time
@@ -81,12 +81,12 @@ class BSHistoryService {
         def startTime = calender.time
         def startStr = sdf.format(startTime)
         def endStr = sdf.format(endTime)
-        def query = "select create_day as xValue, round(avg(${key}),3) as yValue from bshistory where " +
-                "battery_system_id=? and create_time >= ? and create_time <=? group by create_day"
-        sql.rows(query, [batteryId, startStr, endStr])
+        def query = "select create_day as xValue, round(avg(${key}),3) as yValue from device_history_value where " +
+                "uid=? and create_time >= ? and create_time <=? group by create_day"
+        sql.rows(query, [uid, startStr, endStr])
     }
 
-    def calculateByMonth(Long batteryId, String key) {
+    def calculateByMonth(String uid, String key) {
         def sql = new Sql(dataSource)
         def calender = Calendar.getInstance(Locale.CHINA)
         def endTime = calender.time
@@ -95,12 +95,12 @@ class BSHistoryService {
         def startTime = calender.time
         def startStr = sdf.format(startTime)
         def endStr = sdf.format(endTime)
-        def query = "select create_month as xValue, round(avg(${key}),3) as yValue from bshistory where " +
-                "battery_system_id=? and create_time >= ? and create_time <=? group by create_month"
-        sql.rows(query, [batteryId, startStr, endStr])
+        def query = "select create_month as xValue, round(avg(${key}),3) as yValue from device_history_value where " +
+                "uid=? and create_time >= ? and create_time <=? group by create_month"
+        sql.rows(query, [uid, startStr, endStr])
     }
 
-    def calculateByYear(Long batteryId, String key) {
+    def calculateByYear(String uid, String key) {
         def sql = new Sql(dataSource)
         def calender = Calendar.getInstance(Locale.CHINA)
         def endTime = calender.time
@@ -109,8 +109,9 @@ class BSHistoryService {
         def startTime = calender.time
         def startStr = sdf.format(startTime)
         def endStr = sdf.format(endTime)
-        def query = "select create_year as xValue, round(avg(${key}),3) as yValue from bshistory where " +
-                "battery_system_id=? and create_time >= ? and create_time <=? group by create_year"
-        sql.rows(query, [batteryId, startStr, endStr])
+        def query = "select create_year as xValue, round(avg(${key}),3) as yValue from device_history_value where " +
+                "uid=? and create_time >= ? and create_time <=? group by create_year"
+        sql.rows(query, [uid, startStr, endStr])
     }
+    
 }
