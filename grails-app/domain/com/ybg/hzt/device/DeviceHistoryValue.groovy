@@ -49,10 +49,10 @@ class DeviceHistoryValue {
     Float kmv = 0f//控母电压
     Float oi = 0f//输出电流
     Integer alm = 0//报警
-    Float ex1 = 0f//扩展
-    Float ex2 = 0f//扩展
-    Float ex3 = 0f//扩展
-    Float ex4 = 0f//扩展
-    Float ex5 = 0f//扩展
     Date createTime = new Date()
+    Float dp = 0f//电池压差
+    Float chv = 0f//单体最高电压
+    Float clv = 0f//单体最低电压
+    Float cht = 0f//单体最高温度
+    Float chr = 0f//单体最高内阻
 }
