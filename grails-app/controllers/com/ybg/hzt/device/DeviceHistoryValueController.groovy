@@ -6,7 +6,7 @@ import grails.converters.JSON
 
 class DeviceHistoryValueController {
 
-    def deviceValueHistoryService
+    def deviceHistoryValueService
 
     def list(String token, String uid, Integer pageSize, Integer pageNum) {
         def map = [:]
@@ -44,7 +44,7 @@ class DeviceHistoryValueController {
         if (UserUtil.checkToken(token)) {
             def userInfo = UserInfo.get(UserUtil.getUserId(token))
             if (userInfo && uid) {
-                def data = deviceValueHistoryService.listByKey(uid, key, pageSize, pageNum)
+                def data = deviceHistoryValueService.listByKey(uid, key, pageSize, pageNum)
 
                 map.isSuccess = true
                 map.message = ""
@@ -71,7 +71,7 @@ class DeviceHistoryValueController {
         if (UserUtil.checkToken(token)) {
             def userInfo = UserInfo.get(UserUtil.getUserId(token))
             if (userInfo && uid) {
-                def data = deviceValueHistoryService.calculate(uid, key, period)
+                def data = deviceHistoryValueService.calculate(uid, key, period)
 
                 map.isSuccess = true
                 map.message = ""

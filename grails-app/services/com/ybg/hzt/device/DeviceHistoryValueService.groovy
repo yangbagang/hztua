@@ -6,7 +6,7 @@ import groovy.sql.Sql
 import java.text.SimpleDateFormat
 
 @Transactional(readOnly = true)
-class DeviceValueHistoryService {
+class DeviceHistoryValueService {
 
     def sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
