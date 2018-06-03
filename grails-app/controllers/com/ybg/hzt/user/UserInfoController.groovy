@@ -34,7 +34,7 @@ class UserInfoController {
                 } else {
                     map.isSuccess = false
                     map.message = "用户名或密码错误"
-                    map.errorCode = "2"
+                    map.errorCode = "3"
                     map.data = "false"
                 }
             }
