@@ -24,6 +24,9 @@ class UserInfoMarshaller implements ObjectMarshaller<JSON> {
                 .key("company").value(object.company)
                 .key("appToken").value(object.appToken)
                 .key('token').value(object.token)
+                .key("code").value(object.code)
+                .key("sideNum").value(object.sideNum)
+                .key('installedCapacity').value(object.installedCapacity)
         writer.endObject()
     }
 

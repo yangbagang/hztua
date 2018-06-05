@@ -116,8 +116,8 @@ class DeviceHistoryValueService {
 
     def listByKey(String uid, String key, Integer pageSize, Integer pageName) {
         def sql = new Sql(dataSource)
-        def query = "select ? as yValue, create_time as xValue from device_history_value where uid=?"
-        sql.rows(query, [key, uid], (pageName - 1) * pageSize, pageSize)
+        def query = "select ${key} as yValue, create_time as xValue from device_history_value where uid=?"
+        sql.rows(query, [uid], (pageName - 1) * pageSize, pageSize)
     }
 
 }

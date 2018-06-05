@@ -1,7 +1,5 @@
 package com.ybg.hzt.user
 
-import org.apache.commons.codec.digest.DigestUtils
-
 class UserInfo {
 
     static constraints = {

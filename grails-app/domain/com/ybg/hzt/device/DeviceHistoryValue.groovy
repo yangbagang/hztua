@@ -55,4 +55,27 @@ class DeviceHistoryValue {
     Float clv = 0f//单体最低电压
     Float cht = 0f//单体最高温度
     Float chr = 0f//单体最高内阻
+
+    Integer createYear = 0//年
+    Integer createMonth = 0//月
+    Integer createDay = 0//日
+    Integer createHour = 0//时
+    Integer createMinute = 0//分
+    Integer createSecond = 0//秒
+    Integer dayInWeek = 0//星期几
+    Integer weekInYear = 0//第几周
+
+    def beforeInsert() {
+        def calendar = Calendar.getInstance(Locale.CHINA)
+        createTime = calendar.time
+        createYear = calendar.get(Calendar.YEAR)
+        createMonth = calendar.get(Calendar.MONTH)
+        createDay = calendar.get(Calendar.DAY_OF_MONTH)
+        createHour = calendar.get(Calendar.HOUR_OF_DAY)
+        createMinute = calendar.get(Calendar.MINUTE)
+        createSecond = calendar.get(Calendar.SECOND)
+        dayInWeek = calendar.get(Calendar.DAY_OF_WEEK)
+        weekInYear = calendar.get(Calendar.WEEK_OF_YEAR)
+    }
+
 }
